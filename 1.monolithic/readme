@@ -1,0 +1,13 @@
+이미지 파일을 업로드 하면 이미지 용량을 줄여서 특정 공간에 저장을 하는 예제입니다.
+[폴더 설명]
+upload_monolithic - 강의 기본 샘플 
+
+[iaas]
+1. aws ec2에 upload_monolithic 실행 
+    - 이미지 업로트 테스트 
+    [s3]
+    - s3 버킷 생성 후 이미지 업로드 테스트로 수정
+        
+[paas]
+2. aws elastic beanstalk
+    - upload_monolithic 서비스를 aws paas에  배포
