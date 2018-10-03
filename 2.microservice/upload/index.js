@@ -90,7 +90,7 @@ app.use(fileUpload({ safeFileNames: true, preserveExtension: true }));
 app.use('/uploads', express.static(__dirname + '/uploads'));
 
 // 기본 접속 시 설명 문구를 출력
-app.get('/', (req, res) => res.send('이미지 사이즈를 줄이는 서비스입니다. /upload/에 POST, form-data 방식으로 png 파일을 전송해보세요.'));
+app.get('/', (req, res) => res.send('이미지 사이즈를 줄이는 서비스입니다. /upload/에 POST, form-data 방식으로 png 파일을 전송해보세요.!!!'));
 
 // /upload 주소에 이미지 전송 시
 // 큐에 이미지를 전송
@@ -159,3 +159,4 @@ app.post('/upload', (req, res) => {
 init()
     .then(() => app.listen(port, () => console.log(`Microservice Image Upload Example App Listening...  ${address}:${port}`)))
     .catch(err=>console.error(err));
+
