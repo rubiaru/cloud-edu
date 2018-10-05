@@ -10,7 +10,7 @@ spec:
         app: 이메일아이디-upload
     spec:
       containers:
-      - name: upload 
+      - name: 이메일아이디-upload 
         image: 본인 ACR 주소를 입력해주세요./이메일아이디-upload:latest
         ports:
         - containerPort: 4000 

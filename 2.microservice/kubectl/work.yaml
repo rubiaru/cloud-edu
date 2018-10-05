@@ -10,7 +10,7 @@ spec:
         app: 이메일아이디-worker 
     spec:
       containers:
-      - name: worker 
+      - name: 이메일아이디-worker 
         image: 본인 ACR 주소를 입력해주세요./이메일아이디-worker:latest
         ports:
         - containerPort: 4000 
