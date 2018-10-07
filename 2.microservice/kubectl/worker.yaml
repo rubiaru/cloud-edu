@@ -1,17 +1,17 @@
 apiVersion: apps/v1beta1
 kind: Deployment
 metadata:
-  name: 이메일아이디-worker 
+  name: [emailid]-worker 
 spec:
   replicas: 1
   template:
     metadata:
       labels:
-        app: 이메일아이디-worker 
+        app: [emailid]-worker 
     spec:
       containers:
-      - name: 이메일아이디-worker 
-        image: 본인 ACR 주소를 입력해주세요./이메일아이디-worker:latest
+      - name: [emailid]-worker 
+        image: [acr-login-server]/[emailid]-worker:latest
         ports:
         - containerPort: 4000 
       imagePullSecrets:

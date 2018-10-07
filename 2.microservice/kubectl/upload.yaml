@@ -1,17 +1,17 @@
-apiVersion: apps/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: 이메일아이디-upload 
+  name: [emailid]-upload 
 spec:
   replicas: 1
   template:
     metadata:
       labels:
-        app: 이메일아이디-upload
+        app: [emailid]-upload
     spec:
       containers:
-      - name: 이메일아이디-upload 
-        image: 본인 ACR 주소를 입력해주세요./이메일아이디-upload:latest
+      - name: [emailid]-upload 
+        image: [acr-login-server]/[emailid]-upload:latest
         ports:
         - containerPort: 4000 
       imagePullSecrets:
@@ -20,10 +20,11 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: 이메일아이디-upload 
+  name: [emailid]-upload 
 spec:
   type: LoadBalancer
   ports:
-  - port: 4000 
+  - port: 80 
+    targetPort: 4000
   selector:
-    app: 이메일아이디-upload 
+    app: [emailid]-upload 
