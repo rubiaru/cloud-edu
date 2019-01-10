@@ -1,6 +1,25 @@
 // config load
 require('dotenv').config();
 
+// 퍼블릭 IP를 VM MetaData에서 가져옴
+var publicIP = ''
+if (process.env.nodeEnv == 'azure-production') {
+    // vm meta data 정보 확인
+    // https://docs.microsoft.com/en-us/azure/virtual-machines/windows/instance-metadata-service
+
+    // node 소스가 실행되는 vm에서 public ip 정보를 가져온다
+    const request = require('sync-request');
+    const metadataResponse = request('GET', 'http://169.254.169.254/metadata/instance/network/interface/0/ipv4/ipAddress/0/publicIpAddress?api-version=2017-08-01&format=text', {
+        headers: {
+            'Metadata': 'true'
+        },
+    });
+
+    publicIP = metadataResponse.getBody('utf8');
+    console.log(`Azure VM Public IP: ${publicIP}`);
+}
+
+
 // image minimize
 const imagemin = require('imagemin');
 const imageminPngquant = require('imagemin-pngquant');
@@ -29,7 +48,7 @@ var ifs = require('os').networkInterfaces();
 // 클라우드에 올리는 경우 IP 주소 조회가 작동하지 않습니다.
 // .env 파일에 dnsName이나 public ip를 입력해주세요.
 
-var address = process.env.dnsName || Object.keys(ifs)
+var address = process.env.dnsName || publicIP || Object.keys(ifs)
     .map(x => ifs[x].filter(x => x.family === 'IPv4' && !x.internal)[0])
     .filter(x => x)[0].address;
    
