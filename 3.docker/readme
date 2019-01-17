@@ -1,0 +1,8 @@
+docker compose 명령어를 사용하기 위해서는
+아래 패키지를 설치하세요.
+sudo apt install docker-compose
+
+도커 컴포즈 실행
+docker-compose up -d
+도커 컴포즈 중단
+docker-compose down
