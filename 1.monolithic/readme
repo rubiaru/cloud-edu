@@ -11,3 +11,97 @@ upload_monolithic - 강의 기본 샘플
 [paas]
 2. aws elastic beanstalk
     - upload_monolithic 서비스를 aws paas에  배포
+
+=========================================================================
+참고용
+=========================================================================
+[리소스 그룹]
+ds-이메일아이디-rg
+[가상 네트워크]
+ds-이메일아이디-vnet
+[서브넷]
+ds-이메일아이디-subnet-1
+[가상머신이름]
+ds-이메일아이디-vm
+
+[putty 접속 시 호스트 이름]
+ec2-user@public IP
+[putty 접속 시 세션 이름]
+ec2-user@public IP
+
+[azure-cli 설치]
+------------------------------------------------------------------------------------------
+AZ_REPO=$(lsb_release -cs)
+------------------------------------------------------------------------------------------
+echo "deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ $AZ_REPO main" | \
+    sudo tee /etc/apt/sources.list.d/azure-cli.list
+------------------------------------------------------------------------------------------
+curl -L https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add –
+------------------------------------------------------------------------------------------
+sudo apt-get update
+------------------------------------------------------------------------------------------
+sudo apt-get install -y --allow-unauthenticated apt-transport-https azure-cli
+------------------------------------------------------------------------------------------
+
+[nodejs 설치]
+------------------------------------------------------------------------------------------
+curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
+------------------------------------------------------------------------------------------
+sudo apt-get install -y nodejs
+------------------------------------------------------------------------------------------
+sudo apt-get install -y build-essential
+------------------------------------------------------------------------------------------
+
+[docker 설치]
+------------------------------------------------------------------------------------------
+sudo apt-get update
+------------------------------------------------------------------------------------------
+sudo apt-get -y install \
+    apt-transport-https \
+    ca-certificates \
+    curl \
+    software-properties-common
+------------------------------------------------------------------------------------------    
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add
+------------------------------------------------------------------------------------------
+sudo apt-key fingerprint 0EBFCD88
+------------------------------------------------------------------------------------------
+sudo add-apt-repository \
+   "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+   $(lsb_release -cs) \
+   stable"
+------------------------------------------------------------------------------------------
+sudo apt-get update
+------------------------------------------------------------------------------------------
+sudo apt-get install -y docker-ce
+------------------------------------------------------------------------------------------
+sudo usermod -a -G docker ec2-user
+------------------------------------------------------------------------------------------
+
+[git 설치]
+sudo apt-get install -y git
+
+[모놀리식 샘플]
+// 샘플 소스 받기
+git clone https://github.com/rubiaru/cloud-edu
+// VM 원격접속 후 모놀리식 샘플 소스로 경로 이동 
+cd /home/ec2-user/cloud-edu/1.monolithic/upload_monolithic
+// .env 파일 확인 위해 ls –al 명령 입력
+ls -al
+// .env_template 파일을 .env로 변경
+cp .env_template .env
+// 이미지 업로드 폴더 생성
+mkdir uploads
+// 복사된 .env 파일 확인
+ls -al
+// Azure VM 터미널에서 nodejs 소스를 실행하기 위핸 패키지를 설치
+// 의존성 패키지 설치 명령을 실행
+npm install
+
+//.env 파일 수정
+nano /home/ec2-user/cloud-edu/1.monolithic/upload_monolithic/.env
+
+// vm meta data 정보 확인
+https://docs.microsoft.com/en-us/azure/virtual-machines/windows/instance-metadata-service
+=========================================================================
+
