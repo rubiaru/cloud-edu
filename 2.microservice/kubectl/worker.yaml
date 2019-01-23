@@ -4,6 +4,9 @@ metadata:
   name: [emailid]-worker 
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      app: [emailid]-worker
   template:
     metadata:
       labels:
